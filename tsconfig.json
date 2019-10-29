@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "commonJS",
+        "moduleResolution": "node",
+        "strict": true,
+        "esModuleInterop": true,
+        "baseUrl": ".",
+		"declaration": true,
+		"outDir": "dist"
+    },
+    "files": ["src/index.ts"],
+    "exclude": ["node_modules", "dist"]
+}
