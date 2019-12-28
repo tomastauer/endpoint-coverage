@@ -2,6 +2,12 @@
 
 Provides a way to collect API endpoint test coverage in your API tests.
 
+## Installation
+Via [NPM](https://www.npmjs.com/package/endpoint-coverage)
+```sh
+$ npm install endpoint-coverage --save-dev
+```
+
 ## Usage
 There are two main functions export in the module, `coverageMiddleware` and `collectCoverage`. 
 
