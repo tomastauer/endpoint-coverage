@@ -1,8 +1,4 @@
 import { coverageMiddleware } from './coverageMiddleware';
-import { Coverage, CoverageResult } from './Coverage';
+import { CoverageResult } from './Coverage';
 
-function collectCoverage(): CoverageResult {
-    return Coverage.collectCoverage();
-}
-
-export { coverageMiddleware, collectCoverage };
+export { coverageMiddleware, CoverageResult };

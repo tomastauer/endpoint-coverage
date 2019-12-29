@@ -11,18 +11,30 @@ interface RouteMatch extends ParsedRoute {
 }
 
 export class Coverage {
-    private static matches: RouteMatch[] = [];
-    private static registeredRoutes: ParsedRoute[];
-    private static registeredLayers: RouteLayer[];
+    private matches: RouteMatch[] = [];
+    private registeredRoutes: ParsedRoute[] = [];
+    private registeredLayers: RouteLayer[] = [];
+    private endpointRegistered = false;
 
-    public static tryToRegisterLayers(app: Application): void {
-        if (!this.registeredLayers) {
+    public tryToRegisterLayers(app: Application): void {
+        if (!this.registeredLayers.length) {
             this.registeredLayers = RouteLayer.createLayers(app);
             this.registeredRoutes = this.registeredLayers.map(l => l.getRoute()).flat();
         }
     }
 
-    public static call(request: Request): void {
+    public tryToRegisterResultEndpoint(app: Application): void {
+        if (!this.endpointRegistered) {
+            app.get('/coverageResult', (_, res) => {
+                res.status(200)
+                    .header('Content-type', 'application/json')
+                    .send(this.collectCoverage());
+            });
+            this.endpointRegistered = true;
+        }
+    }
+
+    public call(request: Request): void {
         const originalPath = request.path;
 
         this.matches.push(
@@ -34,7 +46,7 @@ export class Coverage {
         );
     }
 
-    public static collectCoverage(): CoverageResult {
+    public collectCoverage(): CoverageResult {
         const coveredRoutes: Record<string, string[]> = {};
         this.matches.forEach(match => {
             (coveredRoutes[match.path] = coveredRoutes[match.path] || []).push(match.originalPath);

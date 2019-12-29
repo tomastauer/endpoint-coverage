@@ -9,15 +9,15 @@ $ npm install endpoint-coverage --save-dev
 ```
 
 ## Usage
-There are two main functions export in the module, `coverageMiddleware` and `collectCoverage`. 
+There is one main function exported in the module, `coverageMiddleware`. 
 
 ### `coverageMiddleware`
 [Express.js](https://expressjs.com) middleware that collects all HTTP requests made against the server. Scans all request handlers registered in the application and use them for comparison when collecting the coverage.
 
+Registers endpoint (`GET /collectCoverage`) for collecting the coverage.
+
 Middleware should be registered only in the test environment.
 
-### `collectCoverage`
-Compares all the registered endpoints to the list of endpoints that were call so far and returns report object containing `coveredRoutes` and `notCoveredRoutes`. Should be called after all API tests were run.
 
 ```ts
 interface CoverageResult {
@@ -50,10 +50,10 @@ return app.listen(port);
 ### afterTest.ts
 
 ```ts
-import { collectCoverage } from 'endpoint-coverage';
+import { CoverageResult } from 'endpoint-coverage';
 
-afterAll(() => {
-	const coverageResult = collectCoverage();
+afterAll(async () => {
+	const coverageResult: CoverageResult = await fetch('/coverageResult');
 	expect(coverageResult.notCoveredRoutes).toBeEmpty();
 });
 ```

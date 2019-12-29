@@ -1,9 +1,14 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response, RequestHandler } from 'express';
 import { Coverage } from './Coverage';
 
-export function coverageMiddleware(request: Request, _: Response, next: NextFunction): void {
-    Coverage.tryToRegisterLayers(request.app);
-    Coverage.call(request);
+export function coverageMiddleware(): RequestHandler {
+    const coverage = new Coverage();
 
-    next();
+    return (request: Request, _: Response, next: NextFunction): void => {
+        coverage.tryToRegisterLayers(request.app);
+        coverage.tryToRegisterResultEndpoint(request.app);
+        coverage.call(request);
+
+        next();
+    };
 }
