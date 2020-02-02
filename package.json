@@ -1,10 +1,10 @@
 {
     "name": "endpoint-coverage",
-    "version": "0.1.0",
+    "version": "0.2.2",
     "description": "Allows checking the API endpoint coverage of you server.",
     "scripts": {
         "test": "jest --config jest.config.json",
-        "prepublishOnly": "tsc"
+        "prepublishOnly": "rm -rf dist && tsc"
     },
     "keywords": [
         "coverage",
@@ -38,8 +38,7 @@
         "supertest": "^4.0.2",
         "ts-jest": "^24.2.0",
         "ts-node": "^8.5.4",
-        "typescript": "^3.7.3",
-        "express": "^4.17.1"
+        "typescript": "^3.7.3"
     },
     "peerDependencies": {
         "express": "^4.17.1"

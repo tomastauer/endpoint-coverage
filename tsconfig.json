@@ -1,16 +1,16 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs",
         "lib": [
-            "es2019"
+            "es2019", "es7", "es6"
         ],
         "moduleResolution": "node",
         "strict": true,
         "esModuleInterop": true,    
         "baseUrl": ".",
 		"declaration": true,
-		"outDir": "dist"
+        "outDir": "dist"
     },
     "exclude": ["node_modules", "dist"]
 }
