@@ -12,11 +12,11 @@ $ npm install endpoint-coverage --save-dev
 There is one main function exported in the module, `coverageMiddleware`. 
 
 ### `coverageMiddleware`
-[Express.js](https://expressjs.com) middleware that collects all HTTP requests made against the server. Scans all request handlers registered in the application and use them for comparison when collecting the coverage.
+[Express.js](https://expressjs.com) middleware that collects all HTTP requests made against the server. Scans all request handlers registered in the application and pre-attaches middleware checking whether the given handler was called. 
 
 Registers endpoint (`GET /collectCoverage`) for collecting the coverage.
 
-Middleware should be registered only in the test environment.
+Middleware has to be registered only in the test environment.
 
 
 ```ts
@@ -38,7 +38,7 @@ const app = express();
 const port = 12345;
 
 if(isTestEnv()) {
-	app.use(coverageMiddleware);
+	app.use(coverageMiddleware());
 }
 
 app.get('/path/:param', () => {...});
