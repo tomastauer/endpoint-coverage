@@ -1,6 +1,6 @@
 {
     "name": "endpoint-coverage",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "description": "Allows checking the API endpoint coverage of you server.",
     "scripts": {
         "test": "jest --config jest.config.json",
@@ -33,7 +33,7 @@
         "eslint": "^6.7.2",
         "eslint-config-prettier": "^6.7.0",
         "eslint-plugin-prettier": "^3.1.2",
-        "jest": "^24.9.0",
+        "jest": "^25.2.7",
         "prettier": "^1.19.1",
         "supertest": "^4.0.2",
         "ts-jest": "^24.2.0",
